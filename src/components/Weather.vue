@@ -2,7 +2,9 @@
 <div id="app">
   <div class="mainn" v-bind:class="{warm: state_weather}">
       <div class="search-box">
-            <input class="search-bar" type="text" placeholder="Search..." v-model="data.city" @keyup.enter="getApi()">
+        <!-- add a label to this input -->
+        <label for="search-bar">Météo actuelle</label>
+            <input class="search-bar" type="text" placeholder="Entrez le nom d'une ville ou d'un village" v-model="data.city" @keyup.enter="getApi()">
                       <div v-if="data.weather">
                         <div class="header">
                             <h1>{{data.weather.name}}</h1>
@@ -41,7 +43,7 @@ export default {
 methods:{
    async getApi(){
     if(this.data.city===''){
-      this.data.city = 'Tashkent'
+      this.data.city = 'Paris'
     }
     const getWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${this.data.city}&appid=261514ec6ead072a338a344dce0fb58f`)
     console.log(getWeather);
@@ -89,6 +91,14 @@ body{
   left: 300px;
   margin: 200px;
   position: relative;
+}
+
+label{
+  display: block;
+  font-size: 60px;
+  color: azure;
+  margin-bottom: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .search-box .search-bar{
   display: block;
